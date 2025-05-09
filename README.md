@@ -10,142 +10,102 @@
       --black: #171A20;
       --gray:  #E0E0E0;
       --r:      12px;
-      --font:   -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --base-size: 16px;
+      --font:   -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      --base:   16px;
     }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: var(--font);
-    }
-    html { font-size: var(--base-size); }
-    body {
-      background: #fff;
-      color: var(--black);
-      overscroll-behavior: none;
-    }
-    /* ===== HEADER ===== */
+    * { box-sizing:border-box; margin:0; padding:0; font-family:var(--font); }
+    html { font-size: var(--base); }
+    body { background:#fff; color:var(--black); overscroll-behavior:none; }
+    /* HEADER */
     #header {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 48px;
-      background: #fff; border-bottom: 1px solid #ddd;
-      display: flex; align-items: center;
-      justify-content: space-between; padding: 0 12px;
-      z-index: 1000;
+      position:fixed; top:0; left:0; right:0; height:48px;
+      background:#fff; border-bottom:1px solid #ddd;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 12px; z-index:1000;
     }
-    #header button {
-      background: none; border: none; font-size: 1rem; cursor: pointer;
-      padding: 6px;
-    }
-    #header label {
-      font-size: 0.9rem; display: flex; align-items: center; gap: 4px;
-    }
-    /* ===== BANNER ===== */
+    #header button { background:none; border:none; font-size:1rem; cursor:pointer; }
+    #header label { font-size:0.9rem; display:flex; align-items:center; gap:4px; }
+    /* BANNER */
     #banner {
-      position: fixed; top: 48px; left: 0;
-      width: 100%; padding: 10px 12px;
-      background: var(--black); color: #fff;
-      text-align: center; font-size: 0.9rem;
-      transform: translateY(-100%); transition: transform 0.3s ease;
-      z-index: 900;
+      position:fixed; top:48px; left:0; right:0;
+      padding:10px 12px; background:var(--black); color:#fff;
+      text-align:center; font-size:0.9rem;
+      transform:translateY(-100%); transition:transform .3s;
+      z-index:900;
     }
-    #banner.visible { transform: translateY(0); }
-    /* ===== SECTIONS ===== */
+    #banner.visible { transform:translateY(0); }
+    /* SECTIONS */
     section {
-      display: none;
-      position: fixed; inset: 48px 0 144px;
-      overflow: auto; padding: 12px 16px;
+      display:none; position:fixed;
+      top:48px; bottom:144px; left:0; right:0;
+      overflow:auto; padding:12px 16px;
     }
-    section.active { display: block; }
-    h1 {
-      text-align: center;
-      font-weight: 600;
-      font-size: 1.25rem;
-      margin-bottom: 12px;
-    }
-    .content { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    section.active { display:block; animation:fade .2s; }
+    @keyframes fade { from{opacity:0} to{opacity:1} }
+    h1 { text-align:center; font:600 1.25rem var(--font); margin-bottom:12px; }
+    .content { display:flex; flex-direction:column; align-items:center; gap:16px; }
     .placeholder {
-      width: 100%; background: var(--gray);
-      border: 1px dashed #aaa; border-radius: var(--r);
+      background:var(--gray); border:1px dashed #aaa; border-radius:var(--r);
     }
-    /* ===== BUTTON ===== */
+    .album-art { width:80px; height:80px; border-radius:6px; }
+    /* BUTTONS & INPUTS */
     .btn {
-      display: block; width: 90%; max-width: 320px;
-      padding: 14px 0; text-align: center;
-      background: var(--red); color: #fff;
-      border: none; border-radius: var(--r);
-      font-weight: 500; font-size: 1rem;
-      cursor: pointer; position: relative;
+      width:90%; max-width:320px; padding:14px 0;
+      background:var(--red); color:#fff; border:none; border-radius:var(--r);
+      font-weight:500; font-size:1rem; cursor:pointer;
     }
-    .btn:disabled { background: #ccc; cursor: not-allowed; }
-    /* ===== INPUTS ===== */
-    input[type="search"], input[type="time"], input[type="number"], select {
-      width: 90%; max-width: 320px;
-      padding: 8px; font-size: 1rem;
-      border: 1px solid #ccc; border-radius: 6px;
+    select, input[type=search], input[type=time] {
+      width:90%; max-width:320px; padding:8px; font-size:1rem;
+      border:1px solid #ccc; border-radius:6px;
     }
-    input[type="range"] {
-      -webkit-appearance: none;
-      width: 90%; max-width: 320px;
-      height: 6px; background: #ddd; border-radius: 3px;
+    input[type=range] {
+      -webkit-appearance:none; width:90%; max-width:320px; height:6px;
+      background:#ddd; border-radius:3px; margin:12px 0;
     }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px; height: 18px; border-radius: 50%;
-      background: var(--red); cursor: pointer;
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance:none; width:18px; height:18px;
+      border-radius:50%; background:var(--red); cursor:pointer;
     }
-    /* ===== MINI PLAYER ===== */
+    /* MINI PLAYER */
     #miniPlayer {
-      position: fixed; bottom: 88px; left: 0;
-      width: 100%; padding: 8px 16px;
-      background: #fff; border-top: 1px solid #ddd;
-      display: flex; align-items: center; gap: 12px;
-      z-index: 500;
+      position:fixed; bottom:88px; left:0; right:0;
+      background:#fff; border-top:1px solid #ddd;
+      display:flex; align-items:center; gap:12px; padding:8px 16px;
+      z-index:500;
     }
-    #miniPlayer img {
-      width: 40px; height: 40px; border-radius: 6px;
+    #miniPlayer .avatar {
+      width:40px; height:40px; border-radius:6px; background:var(--gray);
     }
-    #miniPlayer .track {
-      flex: 1; font-size: 0.95rem; white-space: nowrap;
-      overflow: hidden; text-overflow: ellipsis;
-    }
-    /* ===== NAV ===== */
+    #miniPlayer .track { flex:1; font-size:0.95rem; }
+    /* NAVIGATION */
     nav {
-      position: fixed; bottom: 0; left: 0;
-      width: 100%; height: 88px;
-      background: #fff; border-top: 1px solid #ddd;
-      display: flex;
+      position:fixed; bottom:0; left:0; right:0; height:88px;
+      background:#fff; border-top:1px solid #ddd; display:flex;
     }
     nav a {
-      flex: 1; text-align: center; padding-top: 10px;
-      font-size: 0.85rem; color: #666; text-decoration: none;
-      cursor: pointer;
+      flex:1; text-align:center; padding-top:10px;
+      font-size:0.85rem; color:#666; text-decoration:none; cursor:pointer;
     }
-    nav a.active { color: var(--red); font-weight: 600; }
-    nav svg { display: block; margin: 0 auto 4px; height: 24px; fill: currentColor; }
-
-    /* ===== CONFIRM MODAL ===== */
+    nav a.active { color:var(--red); font-weight:600; }
+    nav svg { display:block; margin:0 auto 4px; height:24px; fill:currentColor; }
+    /* CONFIRMATION MODAL */
     #confirmModal {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.6); display: none;
-      align-items: center; justify-content: center;
-      z-index: 1001;
+      position:fixed; inset:0; background:rgba(0,0,0,0.6);
+      display:flex; align-items:center; justify-content:center; visibility:hidden;
+      opacity:0; transition:visibility 0s .3s, opacity .3s;
+    }
+    #confirmModal.show {
+      visibility:visible; opacity:1; transition-delay:0s;
     }
     #confirmModal .dialog {
-      background: #fff; padding: 20px; border-radius: 8px;
-      width: 80%; max-width: 280px; text-align: center;
+      background:#fff; padding:20px; border-radius:8px; text-align:center;
+      width:80%; max-width:280px;
     }
     #confirmModal button {
-      margin: 8px; padding: 8px 12px; font-size: 1rem;
-      border: none; border-radius: 6px; cursor: pointer;
+      margin:8px; padding:8px 12px; font-size:1rem; border:none; border-radius:6px; cursor:pointer;
     }
-    #confirmModal button.confirm {
-      background: var(--red); color: #fff; cursor: not-allowed;
-    }
-    #confirmModal button.cancel {
-      background: #ccc; color: #000;
-    }
+    #confirmModal .confirm { background:var(--red); color:#fff; cursor:not-allowed; }
+    #confirmModal .cancel { background:#ccc; color:#000; }
   </style>
 </head>
 <body>
@@ -156,9 +116,7 @@
       <button id="decreaseText">A–</button>
       <button id="increaseText">A+</button>
     </div>
-    <label>
-      <input type="checkbox" id="kidsMode"> Kids Mode
-    </label>
+    <label><input type="checkbox" id="kidsMode"> Kids Mode</label>
   </div>
 
   <!-- BANNER -->
@@ -169,10 +127,8 @@
     <h1>Drive</h1>
     <div class="content">
       <iframe
-        title="Map"
         src="https://maps.google.com/maps?q=37.3947,-122.1500&z=14&output=embed"
-        class="placeholder"
-        style="height:48vh; border:none; border-radius:var(--r); box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+        class="placeholder" style="height:48vh; border:none; border-radius:var(--r);">
       </iframe>
       <input type="search" id="searchInput" placeholder="Search address…">
       <button class="btn" onclick="doSearch()">Search</button>
@@ -189,9 +145,9 @@
   <section id="Audio">
     <h1>Audio</h1>
     <div class="content">
-      <img src="https://via.placeholder.com/80" alt="Album art" style="border-radius:6px;">
+      <div class="placeholder album-art"></div>
       <div class="track">Dreams • Fleetwood Mac</div>
-      <select id="source" onchange="doSource()" style="margin-top:8px;">
+      <select id="source" onchange="doSource()">
         <option>Bluetooth</option>
         <option>Radio</option>
         <option>Spotify</option>
@@ -205,7 +161,7 @@
     <h1>Climate</h1>
     <div class="content">
       <button class="btn" onclick="syncZones()">Sync All Zones to 72°F</button>
-      <label style="width:90%;text-align:left;">Pre-condition time
+      <label>Pre-condition time
         <input type="time" id="preTime" value="07:30">
       </label>
       <button class="btn" onclick="schedulePrecondition()">Schedule Pre-Condition</button>
@@ -214,9 +170,9 @@
 
   <!-- SEATS SCREEN -->
   <section id="Seats">
-    <h1>Seats & Storage</h1>
+    <h1>Seats &amp; Storage</h1>
     <div class="content">
-      <div class="placeholder" style="height:140px;line-height:140px;text-align:center;">
+      <div class="placeholder" style="height:140px; line-height:140px; text-align:center; border-radius:var(--r);">
         Car Top View
       </div>
       <button class="btn" onclick="confirmAction('Unlock vehicle?', unlock)">Unlock / Lock</button>
@@ -227,7 +183,7 @@
 
   <!-- MINI PLAYER -->
   <div id="miniPlayer">
-    <img src="https://via.placeholder.com/40" alt="">
+    <div class="avatar"></div>
     <div class="track">Dreams • Fleetwood Mac</div>
     <input id="miniVol" type="range" min="0" max="100" value="40" oninput="doVolume(this.value)">
   </div>
@@ -240,7 +196,7 @@
     <a data-target="Seats"><svg viewBox="0 0 24 24"><path d="M4 10h16v2H4zm0 4h16v2H4z"/></svg>Seats</a>
   </nav>
 
-  <!-- CONFIRMATION MODAL -->
+  <!-- CONFIRM MODAL -->
   <div id="confirmModal">
     <div class="dialog">
       <p id="confirmText"></p>
@@ -250,123 +206,93 @@
   </div>
 
   <script>
-    // NAVIGATION HANDLER
+    // NAVIGATION
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+        document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
         link.classList.add('active');
-        const tgt = link.dataset.target;
-        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-        document.getElementById(tgt).classList.add('active');
+        document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+        document.getElementById(link.dataset.target).classList.add('active');
       });
     });
 
-    // HEADER CONTROLS
+    // TEXT-SIZING
     document.getElementById('increaseText').onclick = () => {
-      let size = parseFloat(getComputedStyle(document.documentElement).fontSize);
-      document.documentElement.style.fontSize = (size * 1.1) + 'px';
+      let s = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      document.documentElement.style.fontSize = (s*1.1)+'px';
     };
     document.getElementById('decreaseText').onclick = () => {
-      let size = parseFloat(getComputedStyle(document.documentElement).fontSize);
-      document.documentElement.style.fontSize = (size * 0.9) + 'px';
-    };
-    document.getElementById('kidsMode').onchange = e => {
-      const disabled = e.target.checked;
-      document.getElementById('source').disabled = disabled;
-      document.getElementById('volSlider').disabled = disabled;
-      document.getElementById('miniVol').disabled = disabled;
-      showBanner(disabled ? 'Kids Mode ON' : 'Kids Mode OFF');
-      speak(disabled ? 'Kids mode on' : 'Kids mode off');
+      let s = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      document.documentElement.style.fontSize = (s*0.9)+'px';
     };
 
-    // BANNER
-    function showBanner(text) {
-      const b = document.getElementById('banner');
-      b.textContent = text;
-      b.classList.add('visible');
-      setTimeout(() => b.classList.remove('visible'), 3000);
-    }
-    // VOICE PROMPTS
-    function speak(text) {
-      if (!window.speechSynthesis) return;
-      const u = new SpeechSynthesisUtterance(text);
-      window.speechSynthesis.speak(u);
+    // KIDS MODE TOGGLE
+    document.getElementById('kidsMode').onchange = e => {
+      let dis = e.target.checked;
+      document.getElementById('source').disabled = dis;
+      document.getElementById('volSlider').disabled = dis;
+      document.getElementById('miniVol').disabled = dis;
+      showBanner(dis?'Kids Mode ON':'Kids Mode OFF');
+    };
+
+    // BANNER UTILITY
+    function showBanner(txt) {
+      let b = document.getElementById('banner');
+      b.textContent = txt; b.classList.add('visible');
+      setTimeout(()=>b.classList.remove('visible'),3000);
     }
 
     // FLOW FUNCTIONS
     function doSearch() {
-      const addr = document.getElementById('searchInput').value.trim();
-      if (!addr) { showBanner('Please enter an address'); return; }
-      showBanner('Routing to ' + addr + '… ETA 10 min');
-      speak('Routing to ' + addr);
+      let a = document.getElementById('searchInput').value.trim();
+      if(!a) return showBanner('Enter address');
+      showBanner('Routing to '+a);
     }
     function goFavorite() {
-      const fav = document.getElementById('favInput').value;
-      if (!fav) { showBanner('Please choose a favorite'); return; }
-      showBanner('Routing to ' + fav + '… ETA 10 min');
-      speak('Routing to ' + fav);
+      let f = document.getElementById('favInput').value;
+      if(!f) return showBanner('Choose favorite');
+      showBanner('Routing to '+f);
     }
     function doSource() {
-      const s = document.getElementById('source').value;
-      showBanner('Source set to ' + s);
-      speak('Source set to ' + s);
+      showBanner('Source set to '+document.getElementById('source').value);
     }
-    function doVolume(val) {
-      showBanner('Volume ' + val + '%');
-      speak('Volume ' + val + 'percent');
+    function doVolume(v) {
+      showBanner('Volume '+v+'%');
     }
     function syncZones() {
-      showBanner('All zones synced to 72°F');
-      speak('Zones synced');
+      showBanner('All zones synced');
     }
     function schedulePrecondition() {
-      const t = document.getElementById('preTime').value;
-      if (!t) { showBanner('Please pick a time'); return; }
-      showBanner('Pre-condition set at ' + t);
-      speak('Pre condition set at ' + t);
+      let t = document.getElementById('preTime').value;
+      if(!t) return showBanner('Pick time');
+      showBanner('Pre-condition '+t);
     }
     function viewCamera() {
-      showBanner('Showing live cabin camera');
-      speak('Live camera view');
+      showBanner('Showing cabin camera');
     }
 
     // CONFIRMATION MODAL
     let confirmCallback;
-    function confirmAction(text, callback) {
-      confirmCallback = callback;
-      document.getElementById('confirmText').textContent = text;
-      const btn = document.getElementById('confirmBtn');
-      const cd = document.getElementById('countdown');
-      let count = 3;
-      btn.disabled = true;
-      cd.textContent = count;
-      document.getElementById('confirmModal').style.display = 'flex';
-      const interval = setInterval(() => {
-        count--;
-        cd.textContent = count;
-        if (count <= 0) {
-          clearInterval(interval);
-          btn.disabled = false;
-        }
-      }, 1000);
+    function confirmAction(txt, cb) {
+      confirmCallback = cb;
+      document.getElementById('confirmText').textContent = txt;
+      document.getElementById('confirmModal').classList.add('show');
+      let c=3, btn=document.getElementById('confirmBtn'), cd=document.getElementById('countdown');
+      btn.disabled=true; cd.textContent=c;
+      let iv = setInterval(()=>{
+        c--; cd.textContent=c;
+        if(c<=0){ clearInterval(iv); btn.disabled=false; }
+      },1000);
     }
     function closeModal() {
-      document.getElementById('confirmModal').style.display = 'none';
+      document.getElementById('confirmModal').classList.remove('show');
     }
-    document.getElementById('confirmBtn').onclick = () => {
-      closeModal();
-      if (confirmCallback) confirmCallback();
+    document.getElementById('confirmBtn').onclick = ()=>{
+      closeModal(); if(confirmCallback) confirmCallback();
     };
-
-    function unlock() {
-      showBanner('Vehicle unlocked');
-      speak('Vehicle unlocked');
-    }
-    function openTrunk() {
-      showBanner('Trunk opened');
-      speak('Trunk opened');
-    }
+    function unlock(){ showBanner('Vehicle unlocked'); }
+    function openTrunk(){ showBanner('Trunk opened'); }
   </script>
 </body>
 </html>
